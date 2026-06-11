@@ -8,8 +8,17 @@ categorias = {
     'Planilhas' : ['.xlsx', '.csv'],
 }
 
-def mover_arquivo():
+def garantir_pasta(pasta, categoria):
+    for p in pasta.iterdir():
+        if p.name == categoria:
+            print('pasta encontrada')
+        else: 
+            return 'Não encontrei a pasta'
+    
+    
+def mover_arquivo(arquivo, categoria):
     pass
+
 
 def obter_categoria(extensao):
     for categoria, extensoes in categorias.items():
@@ -24,8 +33,9 @@ def listar_arquivos(pasta):
     p = Path(pasta)
     for arquivo in p.iterdir():
         if arquivo.is_file():
-            catergoria = obter_categoria(arquivo.name, arquivo.suffix)
-            print(f'{arquivo.name} - {catergoria}')
+            categoria = obter_categoria(arquivo.suffix)
+            print(f'{arquivo.name} -> {categoria}')
+            garantir_pasta(p, categoria)
 
             
 listar_arquivos('pasta_teste')
