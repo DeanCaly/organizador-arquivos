@@ -8,16 +8,6 @@ categorias = {
     'Planilhas' : ['.xlsx', '.csv'],
 }
 
-def garantir_pasta(pasta, categoria):
-    for p in pasta.iterdir():
-        if p.name == categoria:
-            print('pasta encontrada')
-        else: 
-            return 'Não encontrei a pasta'
-    
-    
-def mover_arquivo(arquivo, categoria):
-    pass
 
 
 def obter_categoria(extensao):
@@ -28,7 +18,18 @@ def obter_categoria(extensao):
     return 'Outros'
     
 
-def listar_arquivos(pasta):
+def garantir_pasta(pasta, categoria):
+    caminho = pasta / categoria   
+    if not caminho.exists():
+        caminho.mkdir()      
+        
+        
+def mover_arquivo(arquivo, categoria):
+    pass
+
+
+
+def organizar_arquivos(pasta):
     
     p = Path(pasta)
     for arquivo in p.iterdir():
@@ -38,5 +39,5 @@ def listar_arquivos(pasta):
             garantir_pasta(p, categoria)
 
             
-listar_arquivos('pasta_teste')
+organizar_arquivos('pasta_teste')
 
